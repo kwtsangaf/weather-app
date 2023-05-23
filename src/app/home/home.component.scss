@@ -1,9 +1,9 @@
 .page-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100%;
 }
 
 .info {
@@ -25,6 +25,7 @@ h1.title {
 .info__block {
   display: flex;
   flex-direction: column;
+  padding-bottom: 1em;
 
   > div {
     align-self: center;
@@ -39,10 +40,12 @@ h1.title {
 
 @media screen and (max-width: 768px) {
   .info {
-    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .info__block {
-    padding: 1em;
+    line-height: initial;
+    flex-basis: calc(100%);
+    padding-bottom: 1em;
   }
 }
