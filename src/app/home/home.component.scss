@@ -4,4 +4,49 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  font-size: 3rem;
+
+  > div {
+    line-height: initial;
+  }
+}
+
+h1.title {
+  position: absolute;
+  top: 3em;
+}
+
+.info__block {
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    align-self: center;
+  }
+}
+
+.button--next {
+  position: absolute;
+  bottom: 3em;
+  right: 4em;
+}
+
+@media screen and (max-width: 768px) {
+  .info {
+    flex-direction: column;
+  }
+
+  .info__block {
+    padding: 1em;
+  }
 }

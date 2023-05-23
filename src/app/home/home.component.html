@@ -1,24 +1,22 @@
 <div class="container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title><h1>Weather Forecast</h1></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h2>Your current location: {{ cityName }}</h2>
-      <h2>Today's temperature: {{ temperature }}°C</h2>
-      <h2>Rain: {{ rain }}%</h2>
+  <h1 class="title">Weather <i class="fa fa-globe" aria-hidden="true"></i> Forecast</h1>
 
-      <div class="info">
-        <div class="location">{{ cityName }}</div>
-        <div class="temperature">
-          <div></div>
-          <div>{{ temperature }}</div>
-        </div>
-        <div class="rain">
-          <div></div>
-          <div>{{ rain }}</div>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <div class="info">
+    <div class="location info__block">
+      <div><i class="fa fa-plane" aria-hidden="true"></i></div>
+      <div>{{ cityName }}</div>
+    </div>
+    <div class="temperature info__block">
+      <div><i class="fa fa-thermometer-empty" aria-hidden="true"></i></div>
+      <div>{{ temperature }}°C</div>
+    </div>
+    <div class="rain info__block">
+      <div><i class="fa fa-tint" aria-hidden="true"></i></div>
+      <div>{{ rain }}%</div>
+    </div>
+  </div>
+
+  <button class="button--next" mat-fab color="accent" aria-label="go to detail page">
+    <mat-icon>navigate_next</mat-icon>
+  </button>
 </div>
