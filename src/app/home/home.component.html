@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h1>Weather Forecast</h1></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h2>Your current location: {{ cityName }}</h2>
+      <h2>Today's temperature: {{ temperature }}°C</h2>
+      <h2>Rain: {{ rain }}%</h2>
+
+      <div class="info">
+        <div class="location">{{ cityName }}</div>
+        <div class="temperature">
+          <div></div>
+          <div>{{ temperature }}</div>
+        </div>
+        <div class="rain">
+          <div></div>
+          <div>{{ rain }}</div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
