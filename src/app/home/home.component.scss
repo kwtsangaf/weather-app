@@ -1,0 +1,51 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  font-size: 3rem;
+
+  > div {
+    line-height: initial;
+  }
+}
+
+h1.title {
+  position: absolute;
+  top: 3em;
+}
+
+.info__block {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+
+  > div {
+    align-self: center;
+  }
+}
+
+.button--next {
+  position: absolute;
+  bottom: 3em;
+  right: 4em;
+}
+
+@media screen and (max-width: 768px) {
+  .info {
+    flex-wrap: wrap;
+  }
+
+  .info__block {
+    line-height: initial;
+    flex-basis: calc(100%);
+    padding-bottom: 1em;
+  }
+}
