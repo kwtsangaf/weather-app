@@ -38,7 +38,9 @@
     </div>
   </div>
 
-  <app-chart *ngIf="chartParams != null" [params]="chartParams"></app-chart>
+  <ng-container *ngIf="chartParams != null">
+    <app-chart *ngFor="let params of chartParams" [params]="params"></app-chart>
+  </ng-container>
 
   <button (click)="navigateToHomePage()" class="button--next" mat-fab color="accent" aria-label="go to detail page">
     <mat-icon>home</mat-icon>

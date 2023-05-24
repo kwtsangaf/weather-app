@@ -15,7 +15,9 @@ export class DetailsComponent implements OnInit {
   temperature?: number;
   rain?: number;
 
-  chartParams?: ChartParams;
+  // chartParams?: ChartParams;
+
+  chartParams: ChartParams[] = [];
 
   constructor(private weatherService: WeatherService, private route: ActivatedRoute, private router: Router) {
   }
@@ -34,15 +36,47 @@ export class DetailsComponent implements OnInit {
       this.weatherService.getHourlyData(52.52, 13.41).subscribe({
         next: (response) => {
           this.weather = response;
+          this.renderCharts();
         }
       });
     });
+  }
 
-    this.chartParams = {
-      labels: ["J", "F", "M", "A", "M", "J", "J"],
-      data: [65, 59, 80, 81, 56, 55, 40],
-      label: "My First Dataset",
-    };
+  renderCharts() {
+    this.chartParams.push({
+      labels: this.weather.hourly.time,
+      data: this.weather.hourly.temperature2M,
+      label: "Hourly Temperature",
+      color: "#f1c40f"
+    });
+
+    this.chartParams.push({
+      labels: this.weather.hourly.time,
+      data: this.weather.hourly.visibility,
+      label: "Hourly Visibility",
+      color: "#3498db"
+    });
+
+    this.chartParams.push({
+      labels: this.weather.hourly.time,
+      data: this.weather.hourly.pressureMsl,
+      label: "Hourly Pressure",
+      color: "#95a5a6"
+    });
+
+    this.chartParams.push({
+      labels: this.weather.hourly.time,
+      data: this.weather.hourly.windspeed10M,
+      label: "Hourly Wind Speed",
+      color: "#1abc9c"
+    });
+
+    this.chartParams.push({
+      labels: this.weather.hourly.time,
+      data: this.weather.hourly.relativehumidity2M,
+      label: "Hourly Humidity",
+      color: "#3498db"
+    });
   }
 
   async navigateToHomePage() {

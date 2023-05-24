@@ -5,6 +5,7 @@ import {nanoid} from "nanoid";
 Chart.register(...registerables);
 
 export interface ChartParams {
+  color: string;
   labels: string[];
   label: string;
   data: number[];
@@ -31,14 +32,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
           label: this.params.label,
           data: this.params.data,
           fill: false,
-          borderColor: "rgb(255,242,0)",
+          borderColor: this.params.color,
           tension: 0.1
         }]
       },
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: false
           }
         }
       }
