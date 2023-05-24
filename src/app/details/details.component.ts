@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {WeatherService} from "../weather.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ChartParams} from "../chart/chart.component";
 
 @Component({
@@ -15,7 +15,7 @@ export class DetailsComponent implements OnInit {
 
   chartParams?: ChartParams;
 
-  constructor(private weatherService: WeatherService, private route: ActivatedRoute) {
+  constructor(private weatherService: WeatherService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -34,6 +34,10 @@ export class DetailsComponent implements OnInit {
       data: [65, 59, 80, 81, 56, 55, 40],
       label: "My First Dataset",
     };
+  }
+
+  async navigateToHomePage() {
+    await this.router.navigate([`/home`]);
   }
 
 }
