@@ -32,6 +32,8 @@
     </div>
   </div>
 
+  <app-chart *ngIf="chartParams != null" [params]="chartParams"></app-chart>
+
   <button class="button--next" mat-fab color="accent" aria-label="go to detail page">
     <mat-icon>home</mat-icon>
   </button>
