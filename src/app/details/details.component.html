@@ -16,7 +16,7 @@
     </div>
     <div class="info__block">
       <div class="label">Wind</div>
-      <div>{{ weather.currentWeather.windspeed }} km/h {{ weather.currentWeather.winddirection }}</div>
+      <div>{{ weather.currentWeather.winddirection | windDirection }} {{ weather.currentWeather.windspeed }} km/h</div>
     </div>
     <div class="info__block">
       <div class="label">Humidity</div>

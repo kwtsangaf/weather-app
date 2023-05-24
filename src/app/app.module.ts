@@ -12,13 +12,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { ChartComponent } from './chart/chart.component';
 import {HttpClientModule} from "@angular/common/http";
+import { WindDirectionPipe } from './wind-direction.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DetailsComponent,
-    ChartComponent
+    ChartComponent,
+    WindDirectionPipe
   ],
   imports: [
     BrowserModule,
