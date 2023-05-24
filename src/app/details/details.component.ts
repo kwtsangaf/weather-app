@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {WeatherService} from "../weather.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-details',
@@ -11,12 +12,17 @@ export class DetailsComponent {
   temperature?: number;
   rain?: number;
 
-  constructor(private weatherService: WeatherService) { }
+  constructor(private weatherService: WeatherService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // Simulating data retrieval from a weather service
     this.cityName = 'New York';
     this.temperature = 24;
     this.rain = 30;
+
+    this.route.params.subscribe(params => {
+      console.log(params)
+      this.cityName = params['city'];
+    });
   }
 }
