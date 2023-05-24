@@ -1,18 +1,25 @@
 <div class="page-container">
-  <h1 class="title">Weather <i class="fa fa-globe" aria-hidden="true"></i> Forecast</h1>
+  <div class="title">
+    <h1>Weather <i class="fa fa-globe" aria-hidden="true"></i> Forecast</h1>
+    <i class="caption">How's today's weather?</i>
+  </div>
 
-  <div class="info">
+
+  <div *ngIf="weather!=null" class="info">
     <div class="location info__block">
       <div><i class="fa fa-plane" aria-hidden="true"></i></div>
       <div>{{ cityName }}</div>
     </div>
     <div class="temperature info__block">
       <div><i class="fa fa-thermometer-empty" aria-hidden="true"></i></div>
-      <div>{{ temperature }}°C</div>
+      <div>
+        <div>low: {{ weather.daily.temperature2MMin }}°C</div>
+        <div>high:{{ weather.daily.temperature2MMax }}°C</div>
+      </div>
     </div>
     <div class="rain info__block">
       <div><i class="fa fa-tint" aria-hidden="true"></i></div>
-      <div>{{ rain }}%</div>
+      <div>{{ weather.daily.rainSum }} mm</div>
     </div>
   </div>
 

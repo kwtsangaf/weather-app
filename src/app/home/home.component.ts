@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {WeatherService} from "../weather.service";
 import {Router} from "@angular/router";
+import {DailyForecast} from "../schemas/dailyForecast";
 
 @Component({
   selector: "app-home",
@@ -8,6 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
+  weather!: DailyForecast;
   cityName: string = "";
   temperature?: number;
   rain?: number;
@@ -21,8 +23,11 @@ export class HomeComponent implements OnInit {
     this.temperature = 24;
     this.rain = 30;
 
-    // this.weatherService.getDailyData(52.52, 13.41);
-    this.weatherService.getHourlyData(52.52, 13.41);
+    this.weatherService.getDailyData(52.52, 13.41).subscribe({
+      next: (response) => {
+        this.weather = response;
+      }
+    })
   }
 
   async navigateToDetailsPage() {
