@@ -5,30 +5,36 @@
   </div>
 
 
-  <div class="info">
+  <div class="info" *ngIf="weather">
     <div class="info__block">
       <div class="label">Temperature</div>
-      <div>{{ temperature }}°C</div>
+      <div>{{ weather.currentWeather.temperature }}°C</div>
     </div>
     <div class="info__block">
       <div class="label">Rain</div>
-      <div>{{ rain }}%</div>
+      <div>{{ weather.snapshot!.rain }} mm</div>
     </div>
     <div class="info__block">
       <div class="label">Wind</div>
-      <div>{{ rain }}%</div>
+      <div>{{ weather.currentWeather.windspeed }} km/h {{ weather.currentWeather.winddirection }}</div>
     </div>
     <div class="info__block">
       <div class="label">Humidity</div>
-      <div>{{ rain }}%</div>
+      <div>{{ weather.snapshot!.humidity }}%</div>
     </div>
     <div class="info__block">
       <div class="label">Pressure</div>
-      <div>{{ rain }}%</div>
+      <div>
+        <div>Surface: {{ weather.snapshot!.surfacePressure }} hPa</div>
+        <div>Sealevel: {{ weather.snapshot!.pressureMsl }} hPa</div>
+      </div>
     </div>
     <div class="info__block">
       <div class="label">Visibility</div>
-      <div>{{ rain }}%</div>
+      <div>
+        <div *ngIf="weather.snapshot!.visibility <= 10000">{{ weather.snapshot!.visibility }} m</div>
+        <div *ngIf="weather.snapshot!.visibility > 10000">> 10000m</div>
+      </div>
     </div>
   </div>
 

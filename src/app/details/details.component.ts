@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {WeatherService} from "../weather.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChartParams} from "../chart/chart.component";
+import {HourlyForecast} from "../schemas/hourlyForecast";
 
 @Component({
   selector: "app-details",
@@ -9,6 +10,7 @@ import {ChartParams} from "../chart/chart.component";
   styleUrls: ["./details.component.scss"]
 })
 export class DetailsComponent implements OnInit {
+  weather!: HourlyForecast;
   cityName: string = "";
   temperature?: number;
   rain?: number;
@@ -27,6 +29,13 @@ export class DetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       console.log(params);
       this.cityName = params["city"];
+
+
+      this.weatherService.getHourlyData(52.52, 13.41).subscribe({
+        next: (response) => {
+          this.weather = response;
+        }
+      });
     });
 
     this.chartParams = {

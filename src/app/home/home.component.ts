@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.weather = response;
       }
-    })
+    });
   }
 
   async navigateToDetailsPage() {
