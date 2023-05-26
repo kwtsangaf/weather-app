@@ -2,6 +2,12 @@ import {Component, OnInit} from "@angular/core";
 import {WeatherService} from "../weather.service";
 import {Router} from "@angular/router";
 import {DailyForecast} from "../schemas/dailyForecast";
+import {Subject} from "rxjs";
+
+interface Coordinate {
+  latitude: number;
+  longitude: number;
+}
 
 @Component({
   selector: "app-home",
@@ -10,28 +16,40 @@ import {DailyForecast} from "../schemas/dailyForecast";
 })
 export class HomeComponent implements OnInit {
   weather!: DailyForecast;
-  cityName: string = "";
-  temperature?: number;
-  rain?: number;
+  cityName: string = "Current Location";
+  lat?: number;
+  long?: number;
+
+  locSubject = new Subject<Coordinate>();
 
   constructor(private weatherService: WeatherService, private router: Router) {
   }
 
   ngOnInit() {
-    // Simulating data retrieval from a weather service
-    this.cityName = "New York";
-    this.temperature = 24;
-    this.rain = 30;
-
-    this.weatherService.getDailyData(52.52, 13.41).subscribe({
-      next: (response) => {
-        this.weather = response;
-      }
+    this.locSubject.subscribe(({latitude, longitude}) => {
+      this.lat = latitude;
+      this.long = longitude;
+      this.weatherService.getDailyData(latitude, longitude).subscribe({
+        next: (response) => {
+          this.weather = response;
+        }
+      });
     });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => this.locSubject.next(position.coords),
+        (error) => console.log("Error retrieving location:", error.message)
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+
   }
 
   async navigateToDetailsPage() {
-    let city = "toronto";
-    await this.router.navigate([`/details/${city}`]);
+    const queryParams = {cityName: this.cityName, lat: this.lat, long: this.long};
+    console.log(queryParams)
+    await this.router.navigate([`/details`], {queryParams});
   }
 }
