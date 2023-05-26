@@ -15,6 +15,9 @@ export class DetailsComponent implements OnInit {
   temperature?: number;
   rain?: number;
 
+  date = new Date();
+  timezone = 'America/New_York'
+
   // chartParams?: ChartParams;
 
   chartParams: ChartParams[] = [];
@@ -43,36 +46,37 @@ export class DetailsComponent implements OnInit {
   }
 
   renderCharts() {
+    let time = this.weather.hourly.time.map(t=>t.split('T')[1]);
     this.chartParams.push({
-      labels: this.weather.hourly.time,
+      labels: time,
       data: this.weather.hourly.temperature2M,
       label: "Hourly Temperature",
       color: "#f1c40f"
     });
 
     this.chartParams.push({
-      labels: this.weather.hourly.time,
+      labels: time,
       data: this.weather.hourly.visibility,
       label: "Hourly Visibility",
       color: "#3498db"
     });
 
     this.chartParams.push({
-      labels: this.weather.hourly.time,
+      labels: time,
       data: this.weather.hourly.pressureMsl,
       label: "Hourly Pressure",
       color: "#95a5a6"
     });
 
     this.chartParams.push({
-      labels: this.weather.hourly.time,
+      labels: time,
       data: this.weather.hourly.windspeed10M,
       label: "Hourly Wind Speed",
       color: "#1abc9c"
     });
 
     this.chartParams.push({
-      labels: this.weather.hourly.time,
+      labels: time,
       data: this.weather.hourly.relativehumidity2M,
       label: "Hourly Humidity",
       color: "#3498db"
