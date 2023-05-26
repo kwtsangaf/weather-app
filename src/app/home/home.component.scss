@@ -10,16 +10,22 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
-  font-size: 3rem;
+  font-size: 2rem;
 
   > div {
     line-height: initial;
   }
+
+  .label{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 }
 
-h1.title {
+.title {
   position: absolute;
   top: 3em;
+  text-align: center;
 }
 
 .info__block {
