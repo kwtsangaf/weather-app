@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <button (click)="navigateToDetailsPage()" class="button--next" mat-fab color="accent" aria-label="go to detail page">
+  <button *ngIf="!isLoading" (click)="navigateToDetailsPage()" class="button--next" mat-fab color="accent" aria-label="go to detail page">
     <mat-icon>navigate_next</mat-icon>
   </button>
 </div>

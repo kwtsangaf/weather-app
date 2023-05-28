@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { SpinnerComponent } from './spinner/spinner.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     HttpClientModule,
     MatInputModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

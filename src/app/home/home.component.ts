@@ -2,7 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {WeatherService} from "../weather.service";
 import {Router} from "@angular/router";
 import {DailyForecast} from "../schemas/dailyForecast";
-import {Subject} from "rxjs";
+import {concat, concatMap, Subject} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface Coordinate {
   latitude: number;
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   locationKey: string = "";
   isLoading = true;
 
-  constructor(private weatherService: WeatherService, private router: Router) {
+  constructor(private weatherService: WeatherService, private router: Router, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.weatherService.getDailyData(latitude, longitude, timezone).subscribe({
       next: (response) => {
-        this.locationKey = '';
+        this.locationKey = "";
         this.cityName = locName;
         this.weather = response;
         this.isLoading = false;
@@ -61,17 +62,27 @@ export class HomeComponent implements OnInit {
   async navigateToDetailsPage() {
     const queryParams = {cityName: this.cityName, lat: this.lat, long: this.long};
     console.log(queryParams);
-    // TODO: pass timeszone as well
     await this.router.navigate([`/details`], {queryParams});
   }
 
   searchLocation() {
     console.log(this.locationKey);
     this.isLoading = true;
-    this.weatherService.searchLocation(this.locationKey).subscribe(data => {
+    this.weatherService.searchLocation(this.locationKey).subscribe({
+      next: data => {
+        this.renderWeatherData(data.latitude, data.longitude, data.name, data.timezone);
+      },
+      error: err => {
+        this.locationKey = "";
+        this.openSnackBar("No result found. Please try another place.");
+        this.isLoading = false;
+      }
+    });
+  }
 
-      // TODO: if the result is valid
-      this.renderWeatherData(data.latitude, data.longitude, data.name, data.timezone);
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "", {
+      duration: 1000
     });
   }
 }
