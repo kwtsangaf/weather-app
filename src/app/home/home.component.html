@@ -4,7 +4,6 @@
     <i class="caption">How's today's weather?</i>
   </div>
 
-<!--  <span *ngIf="isLoading">working hard to fetch data...</span>-->
   <app-spinner *ngIf="isLoading"></app-spinner>
 
   <div *ngIf="weather!=null&&!isLoading" class="info">
