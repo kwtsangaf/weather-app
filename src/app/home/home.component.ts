@@ -16,11 +16,13 @@ interface Coordinate {
 })
 export class HomeComponent implements OnInit {
   weather!: DailyForecast;
-  cityName: string = "Current Location";
+  cityName?: string;
   lat?: number;
   long?: number;
 
   locSubject = new Subject<Coordinate>();
+  locationKey: string = "";
+  isLoading = true;
 
   constructor(private weatherService: WeatherService, private router: Router) {
   }
@@ -29,11 +31,8 @@ export class HomeComponent implements OnInit {
     this.locSubject.subscribe(({latitude, longitude}) => {
       this.lat = latitude;
       this.long = longitude;
-      this.weatherService.getDailyData(latitude, longitude).subscribe({
-        next: (response) => {
-          this.weather = response;
-        }
-      });
+
+      this.renderWeatherData(latitude, longitude);
     });
 
     if (navigator.geolocation) {
@@ -47,9 +46,30 @@ export class HomeComponent implements OnInit {
 
   }
 
+  renderWeatherData(latitude: number, longitude: number, locName = "Current Location") {
+    this.isLoading = true;
+    this.weatherService.getDailyData(latitude, longitude).subscribe({
+      next: (response) => {
+        this.cityName = locName;
+        this.weather = response;
+        this.isLoading = false;
+      }
+    });
+  }
+
   async navigateToDetailsPage() {
     const queryParams = {cityName: this.cityName, lat: this.lat, long: this.long};
-    console.log(queryParams)
+    console.log(queryParams);
+    // TODO: pass timeszone as well
     await this.router.navigate([`/details`], {queryParams});
+  }
+
+  searchLocation() {
+    console.log(this.locationKey);
+    this.weatherService.searchLocation(this.locationKey).subscribe(data => {
+      this.locationKey = "";
+      // TODO: if the result is valid
+      this.renderWeatherData(data.latitude, data.longitude, data.name);
+    });
   }
 }

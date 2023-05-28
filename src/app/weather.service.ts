@@ -4,25 +4,28 @@ import {DailyForecast} from "./schemas/dailyForecast";
 import camelcaseKeys from "camelcase-keys";
 import {map, Observable} from "rxjs";
 import {HourlyForecast} from "./schemas/hourlyForecast";
+import {GeocodingSearch, SearchResult} from "./schemas/geocodingSearch";
 
 @Injectable({
   providedIn: "root"
 })
 export class WeatherService {
   apiPrefix = "https://api.open-meteo.com/v1";
+  domain = 'open-meteo.com';
+  version = 'v1';
 
   constructor(private http: HttpClient) {
   }
 
   getDailyData(lat: number, long: number): Observable<DailyForecast> {
-    return this.http.get(`${this.apiPrefix}/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,rain_sum&forecast_days=1&timezone=America%2FNew_York`)
+    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,rain_sum&forecast_days=1&timezone=America%2FNew_York`)
       .pipe(
         map(response => this.adapt(response))
       );
   }
 
   getHourlyData(lat: number, long: number): Observable<HourlyForecast> {
-    return this.http.get(`${this.apiPrefix}/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain,pressure_msl,surface_pressure,visibility,windspeed_10m&current_weather=true&forecast_days=1&timezone=America%2FNew_York`)
+    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain,pressure_msl,surface_pressure,visibility,windspeed_10m&current_weather=true&forecast_days=1&timezone=America%2FNew_York`)
       .pipe(
         map(response => this.adapt(response) as HourlyForecast),
         map(response => {
@@ -42,6 +45,14 @@ export class WeatherService {
             snapshot,
           };
         })
+      );
+  }
+
+  searchLocation(locName: string): Observable<SearchResult> {
+    return this.http.get<GeocodingSearch>(`https://geocoding-api.${this.domain}/${this.version}/search?name=${locName}&count=1&language=en&format=json`)
+      .pipe(
+        // TODO: error check
+        map(response => this.adapt(response).results[0])
       );
   }
 
