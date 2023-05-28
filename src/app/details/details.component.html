@@ -5,8 +5,6 @@
     <h3>{{date | date:'MMM d, y'}}</h3>
   </div>
 
-  <app-spinner *ngIf="isLoading"></app-spinner>
-
   <div class="info" *ngIf="weather&&!isLoading">
     <div class="info__block">
       <div class="label">Temperature</div>
