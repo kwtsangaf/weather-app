@@ -46,9 +46,9 @@ export class HomeComponent implements OnInit {
 
   }
 
-  renderWeatherData(latitude: number, longitude: number, locName = "Current Location") {
+  renderWeatherData(latitude: number, longitude: number, locName = "Current Location", timezone?: string) {
     this.isLoading = true;
-    this.weatherService.getDailyData(latitude, longitude).subscribe({
+    this.weatherService.getDailyData(latitude, longitude, timezone).subscribe({
       next: (response) => {
         this.cityName = locName;
         this.weather = response;
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.weatherService.searchLocation(this.locationKey).subscribe(data => {
       this.locationKey = "";
       // TODO: if the result is valid
-      this.renderWeatherData(data.latitude, data.longitude, data.name);
+      this.renderWeatherData(data.latitude, data.longitude, data.name, data.timezone);
     });
   }
 }

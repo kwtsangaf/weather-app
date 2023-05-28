@@ -17,15 +17,15 @@ export class WeatherService {
   constructor(private http: HttpClient) {
   }
 
-  getDailyData(lat: number, long: number): Observable<DailyForecast> {
-    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,rain_sum&forecast_days=1&timezone=America%2FNew_York`)
+  getDailyData(lat: number, long: number, timezone = 'America/New_York'): Observable<DailyForecast> {
+    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,rain_sum&forecast_days=1&timezone=${encodeURIComponent(timezone)}`)
       .pipe(
         map(response => this.adapt(response))
       );
   }
 
-  getHourlyData(lat: number, long: number): Observable<HourlyForecast> {
-    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain,pressure_msl,surface_pressure,visibility,windspeed_10m&current_weather=true&forecast_days=1&timezone=America%2FNew_York`)
+  getHourlyData(lat: number, long: number, timezone = 'America/New_York'): Observable<HourlyForecast> {
+    return this.http.get(`https://api.${this.domain}/${this.version}/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain,pressure_msl,surface_pressure,visibility,windspeed_10m&current_weather=true&forecast_days=1&timezone=${encodeURIComponent(timezone)}`)
       .pipe(
         map(response => this.adapt(response) as HourlyForecast),
         map(response => {

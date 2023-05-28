@@ -11,12 +11,14 @@
       <div><i class="fa fa-compass" aria-hidden="true"></i></div>
       <div *ngIf="cityName!=null">{{ cityName }}</div>
 
-      <mat-form-field>
-        <input matInput type="text" placeholder="Another place?" [(ngModel)]="locationKey">
-        <button class="button--find" matSuffix mat-icon-button aria-label="Find" (click)="searchLocation()">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
+      <div>
+        <mat-form-field class="input--location">
+          <input matInput type="text" placeholder="Another place? eg. toronto" [(ngModel)]="locationKey">
+          <button class="button--find" matSuffix mat-icon-button aria-label="Find" (click)="searchLocation()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
     </div>
     <div class="temperature info__block">
       <div><i class="fa fa-thermometer-empty" aria-hidden="true"></i></div>
