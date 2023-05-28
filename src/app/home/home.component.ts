@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.weatherService.getDailyData(latitude, longitude, timezone).subscribe({
       next: (response) => {
+        this.locationKey = '';
         this.cityName = locName;
         this.weather = response;
         this.isLoading = false;

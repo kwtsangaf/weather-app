@@ -16,6 +16,7 @@ import {WindDirectionPipe} from "./wind-direction.pipe";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     HomeComponent,
     DetailsComponent,
     ChartComponent,
-    WindDirectionPipe
+    WindDirectionPipe,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

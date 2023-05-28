@@ -4,9 +4,10 @@
     <i class="caption">How's today's weather?</i>
   </div>
 
-  <span *ngIf="isLoading">working hard to fetch data...</span>
+<!--  <span *ngIf="isLoading">working hard to fetch data...</span>-->
+  <app-spinner *ngIf="isLoading"></app-spinner>
 
-  <div *ngIf="weather!=null" class="info">
+  <div *ngIf="weather!=null&&!isLoading" class="info">
     <div class="location info__block">
       <div><i class="fa fa-compass" aria-hidden="true"></i></div>
       <div *ngIf="cityName!=null">{{ cityName }}</div>
