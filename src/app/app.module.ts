@@ -15,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {WindDirectionPipe} from "./wind-direction.pipe";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {FormsModule} from "@angular/forms";
     MatGridListModule,
     HttpClientModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

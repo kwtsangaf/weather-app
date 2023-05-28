@@ -16,7 +16,12 @@
       <div>{{ weather.snapshot!.rain }} mm</div>
     </div>
     <div class="info__block">
-      <div class="label">Wind</div>
+      <div class="label">Wind
+        <mat-icon
+          matTooltip="wind direction includes N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW"
+          matTooltipPosition="above">info
+        </mat-icon>
+      </div>
       <div>{{ weather.currentWeather.winddirection | windDirection }} {{ weather.currentWeather.windspeed }} km/h</div>
     </div>
     <div class="info__block">
