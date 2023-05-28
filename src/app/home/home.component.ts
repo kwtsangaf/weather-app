@@ -66,8 +66,9 @@ export class HomeComponent implements OnInit {
 
   searchLocation() {
     console.log(this.locationKey);
+    this.isLoading = true;
     this.weatherService.searchLocation(this.locationKey).subscribe(data => {
-      this.locationKey = "";
+
       // TODO: if the result is valid
       this.renderWeatherData(data.latitude, data.longitude, data.name, data.timezone);
     });

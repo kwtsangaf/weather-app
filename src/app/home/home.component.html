@@ -13,7 +13,8 @@
 
       <div>
         <mat-form-field class="input--location">
-          <input matInput type="text" placeholder="Another place? eg. toronto" [(ngModel)]="locationKey">
+          <input matInput type="text" placeholder="Another place? eg. toronto" [(ngModel)]="locationKey"
+                 (keyup.enter)="searchLocation()" [readOnly]="isLoading">
           <button class="button--find" matSuffix mat-icon-button aria-label="Find" (click)="searchLocation()">
             <mat-icon>search</mat-icon>
           </button>
