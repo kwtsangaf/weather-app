@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
   rain?: number;
 
   date = new Date();
-  timezone = 'America/New_York'
+  timezone = "America/New_York";
 
   // chartParams?: ChartParams;
 
@@ -27,26 +27,33 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     // Simulating data retrieval from a weather service
-    this.cityName = "New York";
     this.temperature = 24;
     this.rain = 30;
 
-    this.route.params.subscribe(params => {
+    this.route.queryParamMap.subscribe(params => {
       console.log(params);
-      this.cityName = params["city"];
+      const lat = params.get("lat");
+      const long = params.get("long");
+      this.cityName = params.get("cityName") as string;
+      if (lat === null || long === null) {
+        // TODO: display error message
+      } else {
+        this.fetchData(+lat, +long);
+      }
+    });
+  }
 
-
-      this.weatherService.getHourlyData(52.52, 13.41).subscribe({
-        next: (response) => {
-          this.weather = response;
-          this.renderCharts();
-        }
-      });
+  fetchData(lat: number, long: number) {
+    this.weatherService.getHourlyData(lat, long).subscribe({
+      next: (response) => {
+        this.weather = response;
+        this.renderCharts();
+      }
     });
   }
 
   renderCharts() {
-    let time = this.weather.hourly.time.map(t=>t.split('T')[1]);
+    let time = this.weather.hourly.time.map(t => t.split("T")[1]);
     this.chartParams.push({
       labels: time,
       data: this.weather.hourly.temperature2M,

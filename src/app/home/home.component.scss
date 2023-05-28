@@ -16,7 +16,7 @@
     line-height: initial;
   }
 
-  .label{
+  .label {
     font-size: 1.5rem;
     font-weight: bold;
   }
@@ -54,4 +54,12 @@
     flex-basis: calc(100%);
     padding-bottom: 1em;
   }
+}
+
+.button--find {
+  color: black;
+}
+
+.input--location {
+  width: 270px;
 }

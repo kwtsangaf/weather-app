@@ -6,7 +6,7 @@ import {DetailsComponent} from "./details/details.component";
 const routes: Routes = [
   {path: "", redirectTo: "/home", pathMatch: "full"},
   {path: "home", component: HomeComponent},
-  {path: "details/:city", component: DetailsComponent, data: { animation: 'isRight' }},
+  {path: "details", component: DetailsComponent, data: { animation: 'isRight' }},
 ];
 
 @NgModule({

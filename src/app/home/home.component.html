@@ -4,12 +4,22 @@
     <i class="caption">How's today's weather?</i>
   </div>
 
+  <span *ngIf="isLoading">working hard to fetch data...</span>
 
   <div *ngIf="weather!=null" class="info">
     <div class="location info__block">
-      <div><i class="fa fa-plane" aria-hidden="true"></i></div>
-      <div>{{ cityName }}</div>
-      <div><button mat-button color="accent"><i>Another place?</i></button></div>
+      <div><i class="fa fa-compass" aria-hidden="true"></i></div>
+      <div *ngIf="cityName!=null">{{ cityName }}</div>
+
+      <div>
+        <mat-form-field class="input--location">
+          <input matInput type="text" placeholder="Another place? eg. toronto" [(ngModel)]="locationKey"
+                 (keyup.enter)="searchLocation()" [readOnly]="isLoading">
+          <button class="button--find" matSuffix mat-icon-button aria-label="Find" (click)="searchLocation()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
     </div>
     <div class="temperature info__block">
       <div><i class="fa fa-thermometer-empty" aria-hidden="true"></i></div>
