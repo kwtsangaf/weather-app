@@ -1,13 +1,13 @@
 # WeatherApp
 
 ## Checklist
-- [ ] Main Screen
-  - [ ] weather of current location with name of the city, highlighting today temperature, rain, etc..
-  - [ ] an overview with no specific details
-  - [ ] search feature, by city
-- [ ] Details page
-  - [ ] a new page with more details, such as wind, humidity, pressure, visibility
-  - [ ] add a chart with a daily forecast by hour
+- [x] Main Screen
+  - [x] weather of current location with name of the city, highlighting today temperature, rain, etc..
+  - [x] an overview with no specific details
+  - [x] search feature, by city
+- [x] Details page
+  - [x] a new page with more details, such as wind, humidity, pressure, visibility
+  - [x] add a chart with a daily forecast by hour
 
 ## Project Design
 
@@ -22,7 +22,13 @@
 - Call forecast API with hour and with daily respectively
 - Call geocoding API for search feature
 - construct line chart for various factors
-- implement UI test if time allowed
+- construct responsive UI
+- ~~implement UI test if time allowed~~(not enough time to complete)
+
+### Improvements
+- Could implement the customized error representation in frontend, for example pop up a generic error message when encounters 500 error
+- Could make the UI test on different components to test different UI logic
+- may introduce the loading skeleton to specific UI widget, [useful reference](https://www.npmjs.com/package/ngx-skeleton-loader)
 
 ### Improvements
 
