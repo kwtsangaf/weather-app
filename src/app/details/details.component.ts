@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit {
   rain?: number;
 
   date = new Date();
-  timezone = "America/New_York";
+  isLoading = true;
 
   // chartParams?: ChartParams;
 
@@ -44,10 +44,12 @@ export class DetailsComponent implements OnInit {
   }
 
   fetchData(lat: number, long: number) {
+    this.isLoading = true;
     this.weatherService.getHourlyData(lat, long).subscribe({
       next: (response) => {
         this.weather = response;
         this.renderCharts();
+        this.isLoading = false;
       }
     });
   }
