@@ -11,13 +11,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {ChartComponent} from "./chart/chart.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {WindDirectionPipe} from "./wind-direction.pipe";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { SpinnerComponent } from './spinner/spinner.component';
+import {SpinnerComponent} from "./spinner/spinner.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ErrorInterceptor} from "./error.interceptor";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatTooltipModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
