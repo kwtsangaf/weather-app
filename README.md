@@ -1,5 +1,12 @@
 # WeatherApp
 
+## Demo
+website layout
+![](https://github.com/kwtsangaf/weather-app/blob/main/demo/webpage-flow-720.gif?raw=true)
+
+app layout
+![](https://github.com/kwtsangaf/weather-app/blob/main/demo/app-flow-720.gif?raw=true)
+
 ## Checklist
 - [x] Main Screen
   - [x] weather of current location with name of the city, highlighting today temperature, rain, etc..
